@@ -1,0 +1,14 @@
+{
+	"name": "april1-html",
+	"version": "0.0.1",
+	"description": "April1 HTML extension",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/RoboterHund/April1-HTML.git"
+	},
+	"main": "./main",
+	"dependencies": {
+		"april1": "0.3.1"
+	},
+	"author": "Alexander Diaz Chub <roboterhund@gmail.com>"
+}
