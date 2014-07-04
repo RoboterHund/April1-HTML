@@ -26,12 +26,12 @@ function tag (builder, node) {
 	builder.setState (BUILD_ATTRS);
 	builder.build (node, 2);
 
-	if (state.content.length === 0) {
-		state.open.push ('/>');
-
-	} else {
+	if (state.content.length > 1) {
 		state.open.push ('>');
 		var close = [types.CLOSE_TAG_PART, '</', tag, '>'];
+
+	} else {
+		state.open.push ('/>');
 	}
 
 	builder.setState (A.common.BUILD);
@@ -75,10 +75,12 @@ var states = tagBuilderStates ();
 function tagBuilderParams () {
 	params = A.common.builderParams ();
 	params.states = states;
-}
-var params = params ();
 
-var template = A.common.template.buildTemplate.bind ({params: params});
+	return params;
+}
+var params = tagBuilderParams ();
+
+var template = A.common.buildTemplate.bind ({params: params});
 
 module.exports = {
 	BUILD_ATTRS: BUILD_ATTRS,
