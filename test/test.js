@@ -70,3 +70,101 @@ template = A.template (
 expect = '<p id="text">Hello, <em>World</em>.<br/>You <strong>⑨</strong>!</p>';
 string = A.string (template, values);
 showResult (expect, string);
+
+// test 2
+
+template = A.template (
+	A.p (
+		'Hello, ',
+		A.a (
+			A.href (
+				'/who/',
+				A.insert ('who')
+			),
+			A.em (
+				A.insert ('who')
+			)
+		),
+		'.',
+		A.id (A.insert ('id')),
+		A.br (),
+		'You ',
+		A.strong (
+			A.inClass ('baka'),
+			'⑨'
+		),
+		'!'
+	)
+);
+
+expect = '<p id="text">Hello, <a href="/who/World"><em>World</em></a>.<br/>You <strong class="baka">⑨</strong>!</p>';
+string = A.string (template, values);
+showResult (expect, string);
+
+// test 3
+
+template = A.template (
+	A.DOCTYPE,
+	A.html (
+		A.head (
+			A.title (A.insert ('title'))
+		),
+		A.body (
+			A.h1 ('List:'),
+			A.ul (
+				A.list (
+					'items',
+					A.li (
+						A.id (A.insert ('id')),
+						A.p (
+							A.insert ('text'),
+							A.img (
+								A.inClass ('item image'),
+								A.src (
+									'/img/',
+									A.insert ('id')
+								)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+);
+
+values = {
+	title: 'Empty',
+	items: []
+};
+
+expect = '<!DOCTYPE html>'
+	+ '<html>'
+	+ '<head><title>Empty</title></head>'
+	+ '<body><h1>List:</h1><ul></ul></body>'
+	+ '</html>';
+string = A.string (template, values);
+showResult (expect, string);
+
+// test 4
+
+values = {
+	title: 'Utau list',
+	items: [
+		{id: 'teto', text: 'Kasane Teto.'},
+		{id: 'uta', text: 'Utane Uta.'},
+		{id: 'momo', text: 'Momone Momo.'}
+	]
+};
+
+expect = '<!DOCTYPE html>'
+	+ '<html>'
+	+ '<head><title>Utau list</title></head>'
+	+ '<body><h1>List:</h1><ul>'
+	+ '<li id="teto"><p>Kasane Teto.<img class="item image" src="/img/teto"/></p></li>'
+	+ '<li id="uta"><p>Utane Uta.<img class="item image" src="/img/uta"/></p></li>'
+	+ '<li id="momo"><p>Momone Momo.<img class="item image" src="/img/momo"/></p></li>'
+	+ '</ul></body>'
+	+ '</html>';
+string = A.string (template, values);
+showResult (expect, string);

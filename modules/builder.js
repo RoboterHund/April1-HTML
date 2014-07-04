@@ -45,8 +45,14 @@ function tag (builder, node) {
 }
 
 function attr (builder, node) {
-	builder.buildStackTop.open.push (
-		' ', node [1], '="', node [2], '"');
+	var open = builder.buildStackTop.open;
+	open.push (' ', node [1], '="');
+	var i;
+	var n = node.length;
+	for (i = 2; i < n; i++) {
+		open.push (node [i]);
+	}
+	open.push ('"');
 }
 
 function content (builder, node) {

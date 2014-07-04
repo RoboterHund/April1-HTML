@@ -13,6 +13,11 @@ function specTag (tag) {
 	return tagBuilder.bind (null, tag);
 }
 
+var attrBuilder = A.spec.nodeBuilder (types.ATTR);
+function specAttr (attr) {
+	return attrBuilder.bind (null, attr);
+}
+
 module.exports = {
 	// modules
 	builder: builder,
@@ -81,6 +86,16 @@ module.exports = {
 	title: specTag ('title'),
 	tr: specTag ('tr'),
 	ul: specTag ('ul'),
+
+	// attributes
+	inClass: specAttr ('class'),
+	href: specAttr ('href'),
+	id: specAttr ('id'),
+	lang: specAttr ('lang'),
+	name: specAttr ('name'),
+	src: specAttr ('src'),
+	inStyle: specAttr ('style'),
+	type: specAttr ('type'),
 
 	// operation functions
 
