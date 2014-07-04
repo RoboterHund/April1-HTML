@@ -47,3 +47,26 @@ var values = {
 expect = '<p id="text">Hello, World.<br/>You ばか!</p>';
 string = A.string (template, values);
 showResult (expect, string);
+
+// test 1
+
+template = A.template (
+	A.p (
+		'Hello, ',
+		A.em (A.insert ('who')),
+		'.',
+		[
+			A.types.ATTR,
+			'id',
+			A.insert ('id')
+		],
+		A.br (),
+		'You ',
+		A.strong ('⑨'),
+		'!'
+	)
+);
+
+expect = '<p id="text">Hello, <em>World</em>.<br/>You <strong>⑨</strong>!</p>';
+string = A.string (template, values);
+showResult (expect, string);
