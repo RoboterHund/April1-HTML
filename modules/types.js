@@ -1,10 +1,9 @@
 // spec node types
 'use strict';
 
+var Type = require ('april1').modules.types.Type;
+
 module.exports = {
-	ATTR: 'attr',
-	TAG: 'tag',
-	OPEN_TAG_PART: 't1',
-	CONTENT_TAG_PART: 't2',
-	CLOSE_TAG_PART: 't3'
+	ATTR: new Type ('attr'),
+	TAG: new Type ('tag')
 };

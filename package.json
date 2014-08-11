@@ -1,6 +1,6 @@
 {
 	"name": "april1-html",
-	"version": "0.0.1",
+	"version": "0.1.1",
 	"description": "April1 HTML extension",
 	"repository": {
 		"type": "git",
@@ -8,7 +8,7 @@
 	},
 	"main": "./main",
 	"dependencies": {
-		"april1": "0.3.2"
+		"april1": "0.4.5"
 	},
 	"author": "Alexander Diaz Chub <roboterhund@gmail.com>"
 }
