@@ -5,23 +5,39 @@
 
 var A = require ('april1');
 
-var builder = require ('./modules/builder');
+var tempBuild = require ('./modules/templates/build');
+var template = require ('./modules/template');
 var types = require ('./modules/types');
 
-var tagBuilder = A.spec.nodeBuilder (types.TAG);
-function specTag (tag) {
-	return tagBuilder.bind (null, tag);
+/**
+ *
+ * @param name
+ * @returns {Function}
+ */
+function specTag (name) {
+	return A.modules.spec
+		.nodeBuilder (types.TAG).bind (null, name);
 }
 
-var attrBuilder = A.spec.nodeBuilder (types.ATTR);
-function specAttr (attr) {
-	return attrBuilder.bind (null, attr);
+/**
+ *
+ * @param name
+ * @returns {Function}
+ */
+function specAttr (name) {
+	return A.modules.spec
+		.nodeBuilder (types.ATTR).bind (null, name);
 }
 
 module.exports = {
 	// modules
-	builder: builder,
-	types: types,
+	modules: {
+		templates: {
+			build: tempBuild
+		},
+		template: template,
+		types: types
+	},
 
 	// external interface
 
@@ -34,6 +50,9 @@ module.exports = {
 	DOCTYPE: '<!DOCTYPE html>',
 
 	// tags
+
+	specTag: specTag,
+
 	a: specTag ('a'),
 	blockquote: specTag ('blockquote'),
 	body: specTag ('body'),
@@ -88,6 +107,9 @@ module.exports = {
 	ul: specTag ('ul'),
 
 	// attributes
+
+	specAttr: specAttr,
+
 	inClass: specAttr ('class'),
 	href: specAttr ('href'),
 	id: specAttr ('id'),
@@ -99,6 +121,6 @@ module.exports = {
 
 	// operation functions
 
-	template: builder.template,
+	template: template.doBuildTemplate,
 	string: A.string
 };

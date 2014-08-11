@@ -19,20 +19,22 @@ function showResult (expect, string) {
 
 // test 0
 
+var types = A.modules.types;
+
 template = A.template (
 	[
-		A.types.TAG,
+		types.TAG,
 		'p',
 		'Hello, ',
 		A.insert ('who'),
 		'.',
 		[
-			A.types.ATTR,
+			types.ATTR,
 			'id',
 			A.insert ('id')
 		],
 		[
-			A.types.TAG,
+			types.TAG,
 			'br'
 		],
 		'You ばか!'
@@ -56,7 +58,7 @@ template = A.template (
 		A.em (A.insert ('who')),
 		'.',
 		[
-			A.types.ATTR,
+			types.ATTR,
 			'id',
 			A.insert ('id')
 		],
@@ -220,4 +222,25 @@ expect = '<!DOCTYPE html>'
 	+ '<img class="item image" src="/img/item_2"/></p></li>'
 	+ '</ul></body></html>';
 string = A.string (template, values);
+showResult (expect, string);
+
+// test 6
+
+var someTag = A.specTag ('tag');
+var someAttr = A.specAttr ('attr');
+
+var someText = 'something';
+var someValue = 'value';
+string = A.string (
+	A.template (
+		someTag (
+			someText,
+			someTag (),
+			someText,
+			someAttr (someValue)
+		)
+	)
+);
+
+expect = '<tag attr="value">something<tag/>something</tag>';
 showResult (expect, string);
